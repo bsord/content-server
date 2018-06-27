@@ -1,0 +1,187 @@
+
+<div class="modal-header">
+  <h4>Select Display Orientation and Resolution</h4>
+</div>
+<div class="modal-body">
+  <form role="form" name="formdisplay">
+    <div class="form-group row">
+      <div class="col-sm-4 text-right">
+        <div class="radio">
+          <label class="text-muted">Resolution</label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.resolution" ng-value="resolutions[0].value"/><small>{{resolutions[0].name}}</small>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.resolution" ng-value="resolutions[1].value"/><small>{{resolutions[1].name}}</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-right">
+        <div class="radio">
+          <label class="text-muted">TV Orientation</label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.orientation" ng-value="orientations[0].value"/><small>{{orientations[0].name}}</small>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div ng-repeat="type in orientations" ng-if="$index &gt; 0" class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.orientation" ng-value="type.value"/><small>{{type.name}}</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-right">
+        <div class="radio">
+          <label class="text-muted"><span translate="translate">Animation</span></label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.animationEnable" ng-change="group.selectedGroup.animationType = null;" ng-value="false"/><small translate="translate">Disable</small>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.animationType" ng-change="group.selectedGroup.animationEnable = true;" value="fade"/><small translate="translate">Fade</small>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.animationType" ng-change="group.selectedGroup.animationEnable = true;" value="right"/><small translate="translate">Slide right</small>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.animationType" ng-change="group.selectedGroup.animationEnable = true;" value="left"/><small translate="translate">Slide left</small>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-3">
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.animationType" ng-change="group.selectedGroup.animationEnable = true;" value="up"/><small translate="translate">Slide up</small>
+          </label>
+        </div>
+        <div class="radio">
+          <label>
+            <input type="radio" ng-model="group.selectedGroup.animationType" ng-change="group.selectedGroup.animationEnable = true;" value="down"/><small translate="translate">Slide down</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-4 text-right">
+        <div class="radio">
+          <label class="text-muted"><span>Signage Background CSS Color</span></label>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <input type="text" placeholder="e.g. #666" ng-model="group.selectedGroup.signageBackgroundColor" class="form-control"/>
+      </div>
+      <div class="col-sm-2">
+        <div title="{{'Default volume output is 100%' }}" class="radio">
+          <label class="text-muted"><span title="needs v1.7.0+">Volume(%)</span></label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <input type="number" min="0" max="100" ng-model="group.selectedGroup.omxVolume" class="form-control"/>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-xs-4 text-right">
+        <div class="radio">
+          <label class="text-muted">Display a Logo</label>
+        </div>
+      </div>
+      <div class="col-xs-4">
+        <button ng-click="showFileList()" class="btn btn-sm btn-link"><span>{{group.selectedGroup.logo || "Select a png image from Assets"}}</span></button>
+        <button ng-if="group.selectedGroup.logo" ng-click="group.selectedGroup.logo=null" class="btn btn-xs btn-warning">X</button>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+          <input type="text" placeholder="x pos" ng-model="group.selectedGroup.logox" class="input-sm form-control"/>
+        </div>
+      </div>
+      <div class="col-xs-2">
+        <div class="form-group">
+          <input type="text" placeholder="y pos" ng-model="group.selectedGroup.logoy" class="input-sm form-control"/>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-right">
+        <div class="radio">
+          <label class="text-muted"><span>Stretch images to the screen</span></label>
+        </div>
+      </div>
+      <div class="col-sm-2">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="resize_image" ng-model="group.selectedGroup.resizeAssets"/><span translate="translate">Enable</span>
+          </label>
+        </div>
+      </div>
+      <div class="col-sm-2 text-right"></div>
+      <!--    .radio-->
+      <!--        label.text-muted-->
+      <div class="col-sm-4">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="reload_checkbox" ng-model="group.selectedGroup.urlReloadDisable" ng-true-value="false" ng-false-value="true" ng-checked="group.selectedGroup.urlReloadDisable !== true"/>
+            <!--span(translate) Enable--><small translate="translate">Reload link URLs each time<br>(appends ?ts in chromeapp)</small>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="form-group row">
+      <div class="col-sm-4 text-right">
+        <div class="radio">
+          <label class="text-muted"><span>Schedule Display OFF</span></label>
+        </div>
+      </div>
+      <div class="col-sm-4">
+        <div class="checkbox">
+          <label>
+            <input type="checkbox" name="sleep_checkbox" ng-model="group.selectedGroup.sleep.enable"/><span>Enable</span>
+          </label>
+        </div>
+      </div>
+    </div>
+    <div ng-show="group.selectedGroup.sleep.enable" class="form-group row">
+      <div class="col-sm-4 col-sm-offset-4">
+        <label><small>ON at</small>
+          <input type="time" ng-model="group.selectedGroup.sleep.ontimeObj" class="form-control"/>
+        </label>
+      </div>
+      <div class="col-sm-4">
+        <label><small>OFF at</small>
+          <input type="time" ng-model="group.selectedGroup.sleep.offtimeObj" class="form-control"/>
+        </label>
+      </div>
+    </div>
+  </form>
+</div>
+<div class="modal-footer">
+  <button ng-click="displayModal.close()" class="btn">Cancel</button>
+  <button ng-click="saveSettings()" class="btn btn-danger">OK</button>
+</div>

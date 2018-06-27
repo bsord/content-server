@@ -1,0 +1,146 @@
+.modal-header
+    h4 Select Display Orientation and Resolution
+.modal-body
+    form(role="form", name="formdisplay")
+        .form-group.row
+            .col-sm-4.text-right
+                .radio
+                    label.text-muted Resolution
+            .col-sm-4
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.resolution",ng-value="resolutions[0].value")
+                        small {{resolutions[0].name}}
+            .col-sm-4
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.resolution",ng-value="resolutions[1].value")
+                        small {{resolutions[1].name}}
+        .form-group.row
+            .col-sm-4.text-right
+                .radio
+                    label.text-muted TV Orientation
+            .col-sm-4
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.orientation",ng-value="orientations[0].value")
+                        small {{orientations[0].name}}
+            .col-sm-4
+                .radio(ng-repeat="type in orientations", ng-if="$index > 0")
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.orientation",ng-value="type.value")
+                        small {{type.name}}
+        .form-group.row
+            .col-sm-4.text-right
+                .radio
+                    label.text-muted
+                        span(translate) Animation
+            .col-sm-2
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.animationEnable",
+                                    ng-change='group.selectedGroup.animationType = null;',ng-value="false")
+                        small(translate) Disable
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.animationType",
+                                    ng-change='group.selectedGroup.animationEnable = true;',value="fade")
+                        small(translate) Fade
+            .col-sm-3
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.animationType",
+                                    ng-change='group.selectedGroup.animationEnable = true;',value="right")
+                        small(translate) Slide right
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.animationType",
+                                    ng-change='group.selectedGroup.animationEnable = true;',value="left")
+                        small(translate) Slide left
+            .col-sm-3
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.animationType",
+                                    ng-change='group.selectedGroup.animationEnable = true;',value="up")
+                        small(translate) Slide up
+                .radio
+                    label
+                        input(type="radio",ng-model="group.selectedGroup.animationType",
+                                    ng-change='group.selectedGroup.animationEnable = true;',value="down")
+                        small(translate) Slide down
+        .form-group.row
+            .col-xs-4.text-right
+                .radio
+                    label.text-muted: span Signage Background CSS Color
+            .col-xs-4
+                input.form-control(type='text',placeholder='e.g. #666',ng-model='group.selectedGroup.signageBackgroundColor')
+            .col-sm-2
+                .radio(title="{{'Default volume output is 100%' }}")
+                    label.text-muted: span( title="needs v1.7.0+") Volume(%)
+            .col-sm-2
+                input.form-control(type='number',min=0,max=100,ng-model='group.selectedGroup.omxVolume')
+
+        .form-group.row
+            .col-xs-4.text-right
+                .radio
+                    label.text-muted Display a Logo
+            .col-xs-4
+                button.btn.btn-sm.btn-link(ng-click="showFileList()")
+                    span {{group.selectedGroup.logo || "Select a png image from Assets"}}
+                button.btn.btn-xs.btn-warning(ng-if="group.selectedGroup.logo",ng-click="group.selectedGroup.logo=null") X
+            .col-xs-2
+                .form-group
+                    input.input-sm.form-control(type='text',placeholder="x pos",ng-model="group.selectedGroup.logox")
+            .col-xs-2
+                .form-group
+                    input.input-sm.form-control(type='text',placeholder="y pos",ng-model="group.selectedGroup.logoy")
+
+        .form-group.row
+            .col-sm-4.text-right
+                .radio
+                    label.text-muted
+                        span Stretch images to the screen
+            .col-sm-2
+                .checkbox
+                    label
+                        input(type='checkbox',name='resize_image', ng-model='group.selectedGroup.resizeAssets')
+                        span(translate) Enable
+            .col-sm-2.text-right
+            //    .radio
+            //        label.text-muted
+            .col-sm-4
+                .checkbox
+                    label
+                        input(type='checkbox',name='reload_checkbox', ng-model='group.selectedGroup.urlReloadDisable',
+                            ng-true-value="false",
+                            ng-false-value="true",
+                            ng-checked="group.selectedGroup.urlReloadDisable !== true"
+                        )
+                        //span(translate) Enable
+                        small(translate) Reload link URLs each time<br>(appends ?ts in chromeapp)
+
+        .form-group.row
+            .col-sm-4.text-right
+                .radio
+                    label.text-muted
+                        span Schedule Display OFF
+            .col-sm-4
+                .checkbox
+                    label
+                        input(type='checkbox',name='sleep_checkbox', ng-model='group.selectedGroup.sleep.enable')
+                        span Enable
+        .form-group.row(ng-show='group.selectedGroup.sleep.enable')
+            .col-sm-4.col-sm-offset-4
+                label
+                    small ON at
+                    input.form-control(type='time',ng-model="group.selectedGroup.sleep.ontimeObj")
+            .col-sm-4
+                label
+                    small OFF at
+                    input.form-control(type='time',ng-model="group.selectedGroup.sleep.offtimeObj")
+
+
+
+.modal-footer
+    button.btn(ng-click='displayModal.close()') Cancel
+    button.btn.btn-danger(ng-click='saveSettings()') OK

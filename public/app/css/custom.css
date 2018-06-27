@@ -1,0 +1,75 @@
+html {
+    height:100%;
+}
+
+body {
+    max-width: 1280px;
+    margin: auto;
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    height:100%;
+    padding-top:70px;
+}
+
+.height100 {
+    height: 100%;
+}
+
+.overflow-hidden {
+    overflow:hidden;
+}
+
+.overflow-auto {
+    overflow:auto;
+}
+
+
+.letter-box {
+    width: 64px;
+    height: 64px;
+    background: lightskyblue;
+    text-align: center;
+    font-size: 32px;
+    line-height: 64px;
+    color: #f8f8ff;
+    text-decoration: none !important;
+}
+
+
+.select-xs {
+    height: 20px;
+    padding: 2px 2px;
+    font-size: 10px;
+    line-height: 1.5;
+    border-radius: 2px;
+}
+
+.media-object {
+    max-height: 64px;
+}
+
+.subtle-text {
+    color: #b8b8b8 !important;
+}
+
+.categories {
+    max-height: 300px;
+    overflow: auto;
+}
+
+body .modal-body {
+    max-height: 700px;
+}
+
+.modal-content > .panel {
+    margin-bottom: 0px;
+}
+
+.group-multiselect {
+    width: 160px;
+    font-size: 12px;
+    padding-left: 3px;
+    padding-right: 3px;
+}
+
+
+
