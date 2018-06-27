@@ -4,11 +4,12 @@ MAINTAINER Brandon Sorgdrager <Brandon.Sorgdrager@gmail.com>
 
 # Install dependencies
 RUN mkdir /usr/src/media; mkdir /usr/src/media/_thumbnails; chmod -R 777 /usr/src/media
-RUN apt-get update;apt-get install nodejs-legacy npm mongodb imagemagick libav-tools git -y;service mongodb enable; service mongodb start
+RUN apt-get update;apt-get install nodejs-legacy npm mongodb imagemagick libav-tools git -y
 
 WORKDIR /usr/src/app
+RUN mkdir /usr/src/db
 RUN git clone https://github.com/bsord/content-server/ . && npm install
 
 
-CMD ["/bin/sh", "-c", "node server.js"]
-
+CMD ["/bin/sh", "-c", "service mongodb start; node server.js"]
+#CMD ["node", "server.js"]
