@@ -8,7 +8,7 @@ RUN apt-get update;apt-get install nodejs-legacy npm mongodb imagemagick libav-t
 RUN npm install pm2 -g
 WORKDIR /usr/src/app
 RUN mkdir /usr/src/db
-RUN git clone https://github.com/bsord/content-server/ . && npm install
+RUN git clone https://github.com/bsord/content-server/ . && npm install;
 
 CMD ["/bin/sh", "-c", "service mongodb start; node server.js; sleep 5s; npm start"]
 #CMD ["node", "server.js"]

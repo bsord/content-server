@@ -38,7 +38,7 @@
     "nodemon": "latest"
   },
   "scripts": {
-    "start": "./node_modules/.bin/nodemon server.js"
+    "start": "./node_modules/.bin/nodemon --ignore 'data/releases/*.json' server.js"
   },
   "license": "(MIT OR Apache-2.0)"
 }
